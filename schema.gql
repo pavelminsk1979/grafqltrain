@@ -1,0 +1,21 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""users"""
+type UserModel {
+  id: String!
+  name: String!
+  lastname: String!
+  email: String
+  age: Int!
+  createdDate: String!
+}
+
+type Query {
+  user: [UserModel!]
+}
+
+type Mutation {
+  addUser: Boolean!
+}

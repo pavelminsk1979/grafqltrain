@@ -6,6 +6,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UserEntity } from './user/user.entity';
 import { UserResolver } from './resolvers/user.resolver';
+import { UsersService } from './user/user-service';
+import { UserRepository } from './user/user-repository';
 
 @Module({
   imports: [
@@ -35,6 +37,6 @@ import { UserResolver } from './resolvers/user.resolver';
     TypeOrmModule.forFeature([UserEntity]),
   ],
   controllers: [AppController],
-  providers: [AppService, UserResolver],
+  providers: [AppService, UserResolver, UsersService, UserRepository],
 })
 export class AppModule {}

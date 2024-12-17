@@ -1,20 +1,36 @@
-//import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Query, Resolver } from '@nestjs/graphql';
+import { Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserModel } from './user.model';
+import { UsersService } from '../user/user-service';
+
+@Resolver(() => UserModel)
+export class UserResolver {
+  constructor(private userService: UsersService) {}
+
+  @Query(() => [UserModel], { name: 'user', nullable: true })
+  async getAllUsers(): Promise<UserModel[]> {
+    const res = await this.userService.getAllUsers();
+    return res;
+  }
+
+  @Mutation(() => Boolean)
+  async addUser(): Promise<boolean> {
+    return this.userService.addUser();
+  }
+}
 
 /*@Resolver(()=>UserModel)
 export class UserResolver {
   constructor(private userService:UserService) {
   }
 
-  @Query(()=>UserModel,{name;'user',nullable:true})
+    @Query(()=>UserModel,{name;'user',nullable:true})
   async getUser(@Args ('id') id:string):Promise<UserModel>{
     return this.userService.getUserById(id)
   }
 
-  @Query(()=>[UserModel],{name;'user',nullable:true})
-  async getAllUsers():Promise<UserModel>{
-    return this.userService.getAllUsers()
+  @Query(() => UserModel)
+  async getUser() {
+    return { name: 'Pavel' };
   }
 
 
@@ -23,13 +39,3 @@ export class UserResolver {
     return this.userService.addUser(args)
   }
 }*/
-
-@Resolver(() => UserModel)
-export class UserResolver {
-  constructor() {}
-
-  @Query(() => UserModel)
-  async getUser() {
-    return { name: 'Pavel' };
-  }
-}
