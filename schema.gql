@@ -10,12 +10,23 @@ type UserModel {
   email: String
   age: Int!
   createdDate: String!
+  postData: PostModel
+}
+
+"""post"""
+type PostModel {
+  id: String!
+  content: String!
+  nameUser: String!
+  createdDate: String!
 }
 
 type Query {
   user: [UserModel!]
+  post: [PostModel!]
 }
 
 type Mutation {
   addUser: Boolean!
+  addPost: Boolean!
 }

@@ -8,6 +8,10 @@ import { UserEntity } from './user/user.entity';
 import { UserResolver } from './resolvers/user.resolver';
 import { UsersService } from './user/user-service';
 import { UserRepository } from './user/user-repository';
+import { PostResolver } from './resolvers/post/post.resolver';
+import { PostEntity } from './post/post.entity';
+import { PostService } from './post/post-service';
+import { PostRepository } from './post/post-repository';
 
 @Module({
   imports: [
@@ -34,9 +38,17 @@ import { UserRepository } from './user/user-repository';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([UserEntity]),
+    TypeOrmModule.forFeature([UserEntity, PostEntity]),
   ],
   controllers: [AppController],
-  providers: [AppService, UserResolver, UsersService, UserRepository],
+  providers: [
+    AppService,
+    UserResolver,
+    UsersService,
+    UserRepository,
+    PostResolver,
+    PostService,
+    PostRepository,
+  ],
 })
 export class AppModule {}
